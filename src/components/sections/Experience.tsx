@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Calendar, MapPin } from "lucide-react";
+import { Sparkles, Calendar, MapPin, Award, ExternalLink } from "lucide-react";
 import { portfolioData } from "@/data/portfolioData";
 
 export default function Experience() {
@@ -135,10 +135,25 @@ export default function Experience() {
                       ))}
                     </div>
 
-                    {/* Calendar Period (Bottom right card display) */}
-                    <div className="flex items-center gap-1.5 mt-6 text-[10px] uppercase font-mono text-neutral-500">
-                      <Calendar className="h-3.5 w-3.5 text-accent-pink" />
-                      {job.period}
+                    {/* Bottom Meta & Certificate */}
+                    <div className="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-white/5">
+                      <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono text-neutral-500">
+                        <Calendar className="h-3.5 w-3.5 text-accent-pink" />
+                        {job.period}
+                      </div>
+
+                      {job.certificateUrl && (
+                        <a
+                          href={job.certificateUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-primary/30 bg-primary/10 text-primary hover:bg-primary/25 text-xs font-mono tracking-wider transition-all duration-300 shadow-[0_0_12px_rgba(0,247,255,0.15)] group/cert"
+                        >
+                          <Award className="w-3.5 h-3.5 text-primary group-hover/cert:scale-110 transition-transform" />
+                          <span>View Certificate</span>
+                          <ExternalLink className="w-3 h-3 opacity-70 group-hover/cert:translate-x-0.5 transition-transform" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
