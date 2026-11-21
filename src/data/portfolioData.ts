@@ -30,8 +30,9 @@ export interface Job {
   location: string;
   description: string;
   skills: string[];
-  kanjiSymbol: string;
+  kanjiSymbol?: string;
   deptLabel: string;
+  certificateUrl?: string;
 }
 
 export const portfolioData = {
@@ -144,26 +145,16 @@ export const portfolioData = {
 
   experience: [
     {
-      id: "kuzushi",
-      role: "SDE Intern",
-      company: "KUZUSHI LABS",
-      period: "Feb — May 2026",
-      location: "Bengaluru · Remote",
-      description: "Built an end-to-end AI voice screening platform — a real-time STT→LLM→TTS pipeline over LiveKit WebRTC with a pre-LLM intent classifier (reducing token costs by 35% and input latency by 95%). Configured a Pipecat conversation layer for natural dialogue flows and human-like interruptions, alongside a LangGraph semantic search microservice for multi-vector candidate matching.",
-      skills: ["LiveKit WebRTC", "Pipecat Flows", "STT/LLM/TTS", "LangGraph", "Vector Search"],
+      id: "rannlab",
+      role: "UI/UX Intern",
+      company: "Rannlab Technologies Pvt. Ltd.",
+      period: "June 2025 – July 2025",
+      location: "Internship",
+      description: "Designed user-centric UI/UX prototypes and high-fidelity interfaces using Figma. Created promotional creatives, marketing designs, and visual content using Canva. Actively contributed to the VetGPT Super Admin Panel Development project, designing interactive interface designs, dashboards, and responsive web elements.",
+      skills: ["Figma", "Canva", "UI/UX Prototyping", "Admin Panel Design", "Wireframing", "Visual Design"],
       kanjiSymbol: "壱",
-      deptLabel: "AI LABS"
-    },
-    {
-      id: "vardan",
-      role: "SDE Intern",
-      company: "VARDAN FUNDS",
-      period: "Oct — Dec 2025",
-      location: "Investment Firm",
-      description: "Architected a secure investment transaction system with interactive stock portfolio models, algorithmic alert trackers, and automatic client report mailers. Built high-yield investment dashboards with live stock analytics modules and financial widgets, speeding up administrative operations and boosting client engagement.",
-      skills: ["React.js", "Redux Toolkit", "Node.js", "Express.js", "Financial APIs"],
-      kanjiSymbol: "弐",
-      deptLabel: "FINTECH"
+      deptLabel: "DESIGN LAB",
+      certificateUrl: "/rannlab-certificate.jpg"
     }
   ] as Job[]
 };
