@@ -43,6 +43,23 @@ export async function POST(req: Request) {
           text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
         }),
       });
+    } else {
+      // Direct FormSubmit integration to tushargupta1208@gmail.com
+      await fetch("https://formsubmit.co/ajax/tushargupta1208@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Origin: "https://tushar-portfolio.vercel.app",
+          Referer: "https://tushar-portfolio.vercel.app/",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          _subject: subject || `New Portfolio Message from ${name}`,
+          message,
+        }),
+      });
     }
 
     return NextResponse.json(

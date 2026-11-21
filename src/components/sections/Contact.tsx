@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Phone, Mail, MapPin, Sparkles, CheckCircle2, Copy, Check } from "lucide-react";
+import { Send, Phone, Mail, MapPin, Sparkles, CheckCircle2, Copy, Check, MessageSquare } from "lucide-react";
 import confetti from "canvas-confetti";
 
 export default function Contact() {
@@ -113,7 +113,7 @@ export default function Contact() {
               </p>
             </div>
 
-            <div className="space-y-6 my-8">
+            <div className="space-y-5 my-8">
               {[
                 { 
                   icon: <Mail className="h-5 w-5 text-primary" />, 
@@ -124,8 +124,14 @@ export default function Contact() {
                 { 
                   icon: <Phone className="h-5 w-5 text-accent-pink" />, 
                   label: "Mobile Line", 
-                  val: "+91 9009XXXXXX",
-                  href: "tel:+919009000000"
+                  val: "+91 9351635646",
+                  href: "tel:+919351635646"
+                },
+                { 
+                  icon: <MessageSquare className="h-5 w-5 text-emerald-400" />, 
+                  label: "WhatsApp Direct", 
+                  val: "+91 9351635646",
+                  href: "https://wa.me/919351635646"
                 },
                 { 
                   icon: <MapPin className="h-5 w-5 text-purple-400" />, 
@@ -322,6 +328,21 @@ export default function Contact() {
                       </>
                     )}
                   </button>
+
+                  {/* Instant WhatsApp Quick Action */}
+                  <a
+                    href={`https://wa.me/919351635646?text=${encodeURIComponent(
+                      form.message
+                        ? `Hi Tushar, my name is ${form.name || "someone"}. ${form.message}`
+                        : "Hi Tushar, I saw your portfolio and would like to connect!"
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-bold font-poppins text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 mt-3 cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:scale-[1.01] active:scale-[0.99]"
+                  >
+                    <MessageSquare className="h-4 w-4 text-emerald-400" />
+                    <span>Or Chat Directly on WhatsApp</span>
+                  </a>
                 </form>
               )}
             </div>
