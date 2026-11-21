@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Calendar, MapPin, Award, ExternalLink } from "lucide-react";
+import { Sparkles, Calendar, MapPin, Award, ExternalLink, CheckCircle2, ShieldCheck } from "lucide-react";
+import Image from "next/image";
 import { portfolioData } from "@/data/portfolioData";
 
 export default function Experience() {
@@ -43,123 +44,165 @@ export default function Experience() {
           </p>
         </div>
 
-        {/* Experience Timeline Grid List */}
-        <div className="max-w-4xl mx-auto space-y-16 relative">
-          {/* Vertical connecting line */}
-          <div className="absolute left-4 sm:left-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-primary/30 via-accent-pink/30 to-accent/30 -translate-x-1/2 hidden md:block" />
+        {/* Centered Featured Showcase Card */}
+        <div className="max-w-4xl mx-auto">
+          {jobsData.map((job) => (
+            <motion.div
+              key={job.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur-xl p-6 sm:p-8 md:p-10 hover:border-cyan-400/40 transition-all duration-500 shadow-[0_25px_60px_rgba(0,0,0,0.7)] group"
+              style={{
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
+              }}
+            >
+              {/* Background Ambient Glows & Matrix Grid */}
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_top_right,rgba(0,247,255,0.08)_0%,transparent_70%)] pointer-events-none" />
+              <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-gradient-to-b from-primary via-accent-pink to-accent opacity-75" />
 
-          {jobsData.map((job, idx) => {
-            const isEven = idx % 2 === 0;
-            return (
-              <motion.div
-                key={job.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className={`relative flex flex-col md:flex-row items-stretch ${
-                  isEven ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Timeline center node indicator */}
-                <div className="absolute left-4 sm:left-1/2 top-8 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-accent-pink bg-neutral-950 z-20 shadow-[0_0_10px_rgba(242,184,200,0.5)] hidden md:block" />
+              {/* Card Top: Role, Company & Verified Badge */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+                <div>
+                  <div className="flex flex-wrap items-center gap-2.5 mb-2.5">
+                    <span className="text-[11px] font-mono tracking-widest uppercase text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/25 flex items-center gap-1.5 shadow-[0_0_10px_rgba(0,247,255,0.1)]">
+                      <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+                      Verified Industry Internship
+                    </span>
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-accent-pink/80 bg-accent-pink/5 px-2.5 py-1 rounded-full border border-accent-pink/20">
+                      {job.deptLabel}
+                    </span>
+                  </div>
 
-                {/* Left/Right spaced flex spacing block */}
-                <div className="w-full md:w-1/2" />
+                  <h3 className="text-white text-3xl md:text-4xl font-bold font-poppins tracking-wide group-hover:text-primary transition-colors">
+                    {job.role}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-neutral-300 font-poppins">
+                    <span className="font-semibold text-white tracking-wide">{job.company}</span>
+                    <span className="text-neutral-500">•</span>
+                    <span className="flex items-center gap-1.5 text-neutral-400 text-xs font-mono">
+                      <MapPin className="w-3.5 h-3.5 text-accent-pink" />
+                      {job.location}
+                    </span>
+                    <span className="text-neutral-500">•</span>
+                    <span className="flex items-center gap-1.5 text-neutral-400 text-xs font-mono">
+                      <Calendar className="w-3.5 h-3.5 text-primary" />
+                      {job.period}
+                    </span>
+                  </div>
+                </div>
 
-                {/* Card side (Left or Right depending on placement) */}
-                <div className={`w-full md:w-1/2 pl-8 md:pl-0 ${isEven ? "md:pr-12" : "md:pl-12"}`}>
-                  <div 
-                    className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur-md p-6 md:p-8 hover:border-accent-pink/30 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.7)] group"
-                    style={{
-                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)",
-                    }}
-                  >
-                    {/* Background Decorative Matrix Vector */}
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 w-44 h-44 pointer-events-none opacity-[0.03] text-primary group-hover:opacity-[0.06] transition-opacity duration-500">
-                      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                        <circle cx="50" cy="50" r="47" stroke="currentColor" strokeWidth="0.8" />
-                        <circle cx="50" cy="50" r="35" stroke="currentColor" strokeWidth="0.5" />
-                        <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" strokeWidth="0.4" />
-                        <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" strokeWidth="0.4" />
-                        <polygon points="50,15 85,50 50,85 15,50" stroke="currentColor" strokeWidth="0.6" />
-                      </svg>
-                    </div>
+                {/* Right: Monogram & Dept Symbol */}
+                <div className="hidden md:flex flex-col items-end shrink-0">
+                  <span className="text-5xl leading-none font-serif text-accent-pink opacity-20 select-none">
+                    {job.kanjiSymbol || "壱"}
+                  </span>
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-neutral-500 mt-1 select-none">
+                    DESIGN // PRODUCTION
+                  </span>
+                </div>
+              </div>
 
-                    {/* Timeline Left side bar */}
-                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary via-accent-pink to-accent pointer-events-none opacity-60" />
+              {/* Card Middle: Split description + Certificate Preview */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-8 items-center">
+                {/* Description & Key Deliverables */}
+                <div className="lg:col-span-8 space-y-4">
+                  <p className="text-neutral-300 text-sm md:text-base leading-relaxed font-poppins">
+                    {job.description}
+                  </p>
 
-                    {/* Top Job Information */}
-                    <div className="flex justify-between items-start mb-6">
-                      <div>
-                        <h3 className="text-white text-2xl font-bold font-poppins tracking-wide group-hover:text-primary transition-colors">
-                          {job.role}
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-2 mt-2">
-                          <span className="text-[10px] uppercase font-mono tracking-widest text-primary bg-primary/5 px-2.5 py-1 rounded border border-primary/20">
-                            {job.company}
-                          </span>
-                          <span className="text-neutral-500 text-xs font-poppins">•</span>
-                          <span className="text-xs text-neutral-400 font-poppins flex items-center gap-1">
-                            <MapPin className="h-3.5 w-3.5 text-accent-pink" />
-                            {job.location}
-                          </span>
+                  <div className="space-y-2 pt-2">
+                    <span className="text-[11px] uppercase font-mono tracking-wider text-primary font-medium flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      Key Responsibilities & Deliverables
+                    </span>
+                    <ul className="space-y-2.5 text-xs md:text-sm text-neutral-400 font-poppins mt-2">
+                      <li className="flex items-start gap-2.5">
+                        <span className="text-primary mt-0.5">▸</span>
+                        <span>Designed user-centric high-fidelity UI/UX prototypes and wireframes in <strong className="text-neutral-200">Figma</strong>.</span>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="text-primary mt-0.5">▸</span>
+                        <span>Contributed significantly to <strong className="text-white">VetGPT Super Admin Panel Development</strong>, delivering interactive layouts, navigation, and web elements.</span>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="text-primary mt-0.5">▸</span>
+                        <span>Crafted brand visual assets, marketing graphics, and digital product designs with <strong className="text-neutral-200">Canva</strong>.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Certificate Showcase Card */}
+                {job.certificateUrl && (
+                  <div className="lg:col-span-4 flex justify-center">
+                    <a
+                      href={job.certificateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/cert relative block w-full max-w-[260px] overflow-hidden rounded-2xl border border-white/15 bg-black/50 hover:border-primary/60 transition-all duration-300 p-3 shadow-xl hover:shadow-[0_0_25px_rgba(0,247,255,0.2)] cursor-pointer"
+                    >
+                      <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-neutral-900 border border-white/10">
+                        <Image
+                          src={job.certificateUrl}
+                          alt="Rannlab Internship Certificate"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 260px"
+                          className="object-cover object-top transition-transform duration-500 group-hover/cert:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                        
+                        <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white">
+                          <div className="flex items-center gap-1.5 text-[10px] font-mono">
+                            <Award className="w-3.5 h-3.5 text-primary" />
+                            <span>Certificate</span>
+                          </div>
+                          <ExternalLink className="w-3 h-3 text-primary opacity-80 group-hover/cert:translate-x-0.5 transition-transform" />
                         </div>
                       </div>
 
-                      {/* Premium symbols (symbols, kanji, dept) */}
-                      <div className="flex flex-col items-end gap-1.5 ml-4 shrink-0 text-right">
-                        <span className="text-4xl leading-none font-serif text-accent-pink opacity-20 select-none">
-                          {job.kanjiSymbol}
-                        </span>
-                        <span className="text-[9px] uppercase font-mono tracking-widest text-neutral-500 select-none">
-                          {job.deptLabel}
+                      <div className="mt-2.5 text-center">
+                        <span className="text-[11px] font-mono text-primary flex items-center justify-center gap-1 group-hover/cert:underline">
+                          View Full Certificate ↗
                         </span>
                       </div>
-                    </div>
-
-                    {/* Main Description */}
-                    <p className="text-neutral-400 text-sm md:text-[14.5px] leading-relaxed font-poppins mb-6">
-                      {job.description}
-                    </p>
-
-                    {/* Tags List */}
-                    <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                      {job.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="text-[9px] uppercase tracking-widest font-mono text-neutral-300 border border-white/10 bg-white/[0.02] px-2.5 py-1 rounded hover:border-primary/40 hover:text-primary transition-colors"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Bottom Meta & Certificate */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-white/5">
-                      <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono text-neutral-500">
-                        <Calendar className="h-3.5 w-3.5 text-accent-pink" />
-                        {job.period}
-                      </div>
-
-                      {job.certificateUrl && (
-                        <a
-                          href={job.certificateUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-primary/30 bg-primary/10 text-primary hover:bg-primary/25 text-xs font-mono tracking-wider transition-all duration-300 shadow-[0_0_12px_rgba(0,247,255,0.15)] group/cert"
-                        >
-                          <Award className="w-3.5 h-3.5 text-primary group-hover/cert:scale-110 transition-transform" />
-                          <span>View Certificate</span>
-                          <ExternalLink className="w-3 h-3 opacity-70 group-hover/cert:translate-x-0.5 transition-transform" />
-                        </a>
-                      )}
-                    </div>
+                    </a>
                   </div>
+                )}
+              </div>
+
+              {/* Card Bottom: Skills Pills & Actions */}
+              <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[10px] uppercase font-mono tracking-wider text-neutral-500 mr-1">
+                    Skills:
+                  </span>
+                  {job.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="text-[10px] uppercase tracking-wider font-mono text-neutral-300 border border-white/10 bg-white/[0.03] px-2.5 py-1 rounded-md hover:border-primary/40 hover:text-primary transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-              </motion.div>
-            );
-          })}
+
+                {job.certificateUrl && (
+                  <a
+                    href={job.certificateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-primary/40 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-mono tracking-wider transition-all shadow-[0_0_15px_rgba(0,247,255,0.12)] group/btn"
+                  >
+                    <Award className="w-4 h-4 text-primary group-hover/btn:scale-110 transition-transform" />
+                    <span>Open Certificate</span>
+                    <ExternalLink className="w-3 h-3 opacity-70" />
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
