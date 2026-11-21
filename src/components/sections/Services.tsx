@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { LayoutGrid, Cpu, Smartphone, Layers, BrainCircuit, Sparkles } from "lucide-react";
+import { LayoutGrid, Cpu, Smartphone, Layers, BrainCircuit, Sparkles, ShieldCheck } from "lucide-react";
 
 interface Service {
   title: string;
@@ -13,7 +13,7 @@ interface Service {
 const servicesData: Service[] = [
   {
     title: "Full Stack Web Apps",
-    description: "Building end-to-end, high-performance web systems on Next.js 15, React, and modular serverless infrastructures, featuring beautiful pixel-perfect UIs.",
+    description: "Building end-to-end, high-performance web systems on Next.js 15, React, and modular serverless infrastructures with clean, responsive interfaces.",
     icon: <LayoutGrid className="h-6 w-6 text-primary" />,
     badge: "Next.js / MERN"
   },
@@ -25,21 +25,27 @@ const servicesData: Service[] = [
   },
   {
     title: "System Design & Scale",
-    description: "Architecting high-scale applications incorporating secure caching layers, distributed vector indexes, load balancing, and structured pipelines.",
+    description: "Architecting high-scale applications incorporating secure caching layers, distributed vector indexes, atomic concurrency locks, and load balancing.",
     icon: <Layers className="h-6 w-6 text-[#2563eb]" />,
     badge: "High Performance"
   },
   {
     title: "Generative AI Integrations",
-    description: "Orchestrating smart application layers utilizing LangGraph prompts, customized STT/TTS audio channels, WebRTC communication, and multi-vector search.",
+    description: "Orchestrating smart application layers utilizing custom fine-tuned LLMs, LangGraph workflows, real-time STT/TTS channels, and semantic search.",
     icon: <BrainCircuit className="h-6 w-6 text-emerald-400" />,
     badge: "RAG & LLMs"
   },
   {
     title: "Immersive UI/UX Engineering",
-    description: "Crafting fluid interactive systems incorporating 3D Canvas visual shaders, custom GSAP timelines, Lenis physics scroll fields, and micro-animations.",
+    description: "Crafting fluid interactive interfaces incorporating 3D Canvas shaders, custom GSAP timelines, Lenis smooth scrolling, and micro-interactions.",
     icon: <Smartphone className="h-6 w-6 text-pink-400" />,
     badge: "Framer / Three.js"
+  },
+  {
+    title: "DevOps & Cloud Security",
+    description: "Deploying automated CI/CD pipelines, containerized microservices with Docker, AST static vulnerability scans, and cloud hosting across Vercel and Render.",
+    icon: <ShieldCheck className="h-6 w-6 text-cyan-400" />,
+    badge: "Docker / CI/CD"
   }
 ];
 
@@ -70,7 +76,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-md p-6 md:p-8 flex flex-col justify-between group hover:border-white/20 transition-colors duration-500 shadow-[0_15px_30px_rgba(0,0,0,0.5)] h-[240px]"
+      className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-white/[0.01] backdrop-blur-md p-6 md:p-8 flex flex-col justify-between group hover:border-cyan-400/30 transition-all duration-500 shadow-[0_15px_30px_rgba(0,0,0,0.5)] min-h-[250px] h-full"
       style={{
         boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)",
       }}
@@ -80,7 +86,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <div
           className="pointer-events-none absolute -inset-px rounded-3xl opacity-100 transition-opacity duration-300 z-0"
           style={{
-            background: `radial-gradient(180px circle at ${coords.x}px ${coords.y}px, rgba(0, 247, 255, 0.07), transparent 80%)`,
+            background: `radial-gradient(180px circle at ${coords.x}px ${coords.y}px, rgba(0, 247, 255, 0.08), transparent 80%)`,
           }}
         />
       )}
@@ -92,20 +98,20 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       <div className="relative z-10 flex flex-col justify-between h-full">
         {/* Card Top Info */}
         <div className="flex justify-between items-start">
-          <div className="p-3 bg-neutral-950 border border-white/10 rounded-2xl group-hover:border-primary/40 group-hover:scale-105 transition-all duration-300">
+          <div className="p-3 bg-neutral-950 border border-white/10 rounded-2xl group-hover:border-primary/40 group-hover:scale-105 transition-all duration-300 shadow-sm">
             {service.icon}
           </div>
-          <span className="text-[9px] uppercase tracking-widest font-mono text-neutral-500 border border-white/5 bg-white/[0.02] px-2.5 py-1 rounded">
+          <span className="text-[9.5px] uppercase tracking-widest font-mono text-neutral-400 border border-white/10 bg-white/[0.03] px-3 py-1 rounded-full">
             {service.badge}
           </span>
         </div>
 
         {/* Card Bottom Info */}
-        <div className="mt-4">
-          <h3 className="text-white text-lg font-bold font-poppins tracking-wider group-hover:text-primary transition-colors">
+        <div className="mt-5">
+          <h3 className="text-white text-xl font-bold font-poppins tracking-wide group-hover:text-primary transition-colors">
             {service.title}
           </h3>
-          <p className="text-xs text-neutral-400 font-poppins mt-2 tracking-wide leading-relaxed line-clamp-3">
+          <p className="text-xs sm:text-[13px] text-neutral-300/90 font-poppins mt-2.5 tracking-wide leading-relaxed">
             {service.description}
           </p>
         </div>
