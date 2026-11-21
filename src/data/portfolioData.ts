@@ -4,10 +4,11 @@ export interface Project {
   subtitle: string;
   description: string;
   longDescription: string;
+  highlights?: string[];
   tags: string[];
   category: "AI/ML" | "Full Stack";
   github: string;
-  demo: string;
+  demo?: string;
   imageClass: string;
   bentoClass: string;
 }
@@ -103,43 +104,104 @@ export const portfolioData = {
 
   projects: [
     {
-      id: "astro-ai",
-      title: "Astro AI",
-      subtitle: "Next-Gen Generative AI Ecosystem",
-      description: "Multi-modal AI orchestrator integrating local LLMs with advanced semantic retrieval vectors and automated pipeline workers.",
-      longDescription: "Astro AI is a high-performance generative AI workspace built on Next.js. It handles parallel multi-model execution, structured text embeddings, dynamic prompt-chaining, and real-time context injections. Utilizing customized LangGraph workers and local vectors, it slashes retrieval delays while maintaining supreme contextual precision.",
-      tags: ["React.js", "JavaScript", "LangGraph", "Vector DB", "TailwindCSS"],
+      id: "ai-website-generator",
+      title: "AI Website Generator",
+      subtitle: "Prompt-to-Website AI Builder with Real-Time Preview Sandbox",
+      description: "Generates complete, modern, responsive websites from natural language prompts using Google Gemini AI, interactive chat refinement, live code playground, and Drizzle/Neon persistence.",
+      longDescription: "A high-performance full-stack web builder that translates plain English prompts into production-ready websites. Integrates Google's Gemini AI with an interactive chat interface to customize layouts in real time. Features full project persistence using Drizzle ORM and Neon Serverless PostgreSQL, Clerk authentication, and pre-built component kits built on Radix UI and Tailwind CSS.",
+      highlights: [
+        "Natural language to complete responsive website generation with Google Gemini",
+        "Interactive real-time chat interface to iteratively tweak UI/UX",
+        "Live interactive code playground & preview sandbox",
+        "Clerk user authentication with project saving & session history",
+        "Drizzle ORM + Neon Serverless PostgreSQL persistence"
+      ],
+      tags: ["Next.js 15", "Google Gemini AI", "TypeScript", "TailwindCSS", "Drizzle ORM", "Neon DB", "Clerk Auth"],
       category: "AI/ML",
-      github: "https://github.com/Tushar-1208-cyber",
-      demo: "https://github.com/Tushar-1208-cyber",
-      imageClass: "from-[#00f7ff]/20 to-[#2563eb]/20",
+      github: "https://github.com/Tushar-1208-cyber/AI-Website_Generator",
+      demo: "https://ai-website-generator-gamma-gold.vercel.app",
+      imageClass: "from-cyan-500/20 via-blue-600/20 to-indigo-600/20",
       bentoClass: "md:col-span-2"
-    },
-    {
-      id: "ai-customer-sentiment",
-      title: "AI Customer Sentiment Engine",
-      subtitle: "NLP & Business Intelligence Pipeline",
-      description: "NLP-driven customer sentiment analysis engine processing text reviews to extract business intelligence and actionable insights.",
-      longDescription: "A machine learning and NLP application that ingests unstructured customer feedback and sentiment data. Uses specialized tokenization and classification pipelines to calculate sentiment distributions, detect churn signals, and present real-time business insights.",
-      tags: ["Python", "NLP", "Machine Learning", "Data Analytics", "React.js"],
-      category: "AI/ML",
-      github: "https://github.com/Tushar-1208-cyber/AI-Customer_Sentiment_Analysis_and_Business_Insight_Engline_Using_NLP",
-      demo: "https://github.com/Tushar-1208-cyber/AI-Customer_Sentiment_Analysis_and_Business_Insight_Engline_Using_NLP",
-      imageClass: "from-[#2563eb]/20 to-[#7c3aed]/20",
-      bentoClass: "md:col-span-1"
     },
     {
       id: "prescripto",
       title: "Prescripto",
-      subtitle: "Doctor Appointment & Healthcare Platform",
-      description: "Full stack healthcare platform featuring online doctor appointment bookings, patient management, and scheduling dashboards.",
-      longDescription: "Prescripto is an intuitive medical booking web application built for healthcare providers and patients. It offers real-time slot scheduling, doctor profiles, user authentication, and admin management for appointments.",
-      tags: ["React.js", "Node.js", "Express.js", "MongoDB", "TailwindCSS"],
+      subtitle: "Enterprise Healthcare & Teleconsultation Platform",
+      description: "Production-grade doctor consultation and booking platform featuring three-tier architecture (Patient, Doctor, Admin), atomic scheduling locks, WebRTC video calls, and Stripe/Razorpay payments.",
+      longDescription: "An enterprise-grade, full-stack healthcare ecosystem built for seamless doctor-patient interactions. Solves double-booking with atomic database locks, incorporates WebRTC and Socket.io for end-to-end encrypted live video appointments, and implements a resilient payment refund engine with cryptographic webhook deduplication for Stripe and Razorpay.",
+      highlights: [
+        "Three-tier portal: Patient Booking, Doctor Workspace & Admin Moderation",
+        "Atomic concurrency locks preventing double-booking of specialist slots",
+        "Real-time WebRTC authenticated video rooms and Socket.io chat",
+        "Dual payment integration (Stripe & Razorpay) with idempotent webhooks",
+        "Digital prescription (Rx) generator and consultation history"
+      ],
+      tags: ["React.js", "Node.js", "Express.js", "MongoDB", "WebRTC", "Socket.io", "Stripe", "Razorpay", "TailwindCSS"],
       category: "Full Stack",
-      github: "https://github.com/Tushar-1208-cyber",
-      demo: "https://github.com/Tushar-1208-cyber",
-      imageClass: "from-pink-500/20 to-[#00f7ff]/20",
+      github: "https://github.com/Tushar-1208-cyber/Prescripto",
+      demo: "https://prescripto-frontend-kappa-coral.vercel.app",
+      imageClass: "from-emerald-500/20 via-teal-600/20 to-cyan-600/20",
+      bentoClass: "md:col-span-1"
+    },
+    {
+      id: "astro-ai",
+      title: "Astro AI",
+      subtitle: "Privacy-First Educational Assistant Powered by Fine-Tuned Local LLMs",
+      description: "On-device AI tutor powered by a custom fine-tuned TinyLlama 1.1B model on GPU. Delivers cloud-independent automated quiz generation, intelligent answer grading, and multi-lingual voice tutoring.",
+      longDescription: "A privacy-centric educational AI platform designed for students and educators. Eliminates cloud API dependencies and recurring token bills by running a locally fine-tuned TinyLlama 1.1B LLM over a GPU-accelerated FastAPI microservice. Features automated test and quiz generation from study notes, semantic natural language grading, and speech-to-text voice tutoring.",
+      highlights: [
+        "Custom fine-tuned TinyLlama 1.1B LLM running 100% on-device (zero cloud leaks)",
+        "GPU-accelerated FastAPI backend with CUDA pipeline optimization",
+        "Automated curriculum quiz generation & smart semantic essay grading",
+        "Multi-lingual interactive tutor with speech recognition and voice input",
+        "Modern Next.js responsive interface with real-time streaming tokens"
+      ],
+      tags: ["Next.js 15", "FastAPI", "Python", "TinyLlama 1.1B", "PyTorch / CUDA", "HuggingFace", "TailwindCSS"],
+      category: "AI/ML",
+      github: "https://github.com/Tushar-1208-cyber/Astro-AI--Gen-Ai_Project",
+      demo: "https://astro-ai-genai-fso7meubz-tushar-1208-cybers-projects.vercel.app",
+      imageClass: "from-purple-600/20 via-indigo-600/20 to-blue-600/20",
+      bentoClass: "md:col-span-1"
+    },
+    {
+      id: "ai-customer-sentiment",
+      title: "AI Customer Sentiment Engine",
+      subtitle: "Aspect-Based NLP Analytics & Review Intelligence Pipeline",
+      description: "Advanced NLP pipeline analyzing thousands of customer reviews with Aspect-Based Sentiment Analysis (ABSA) to isolate feature-level satisfaction (camera, battery, price) and churn signals.",
+      longDescription: "An industrial-strength machine learning and NLP business intelligence pipeline. Goes beyond basic polarity classification to perform Aspect-Based Sentiment Analysis (ABSA), extracting specific entities and calculating granular sentiment vectors per product attribute. Surfaces real-time churn alerts, keyword trends, and interactive executive dashboards.",
+      highlights: [
+        "Aspect-Based Sentiment Analysis (ABSA) for pinpoint product feature scoring",
+        "Processed and vectorized 50,000+ unstructured e-commerce reviews",
+        "Automated customer churn signal detection and critical alert triggers",
+        "Interactive analytics dashboards with sentiment distribution charts",
+        "Modular pipeline supporting BERT/RoBERTa embeddings and TF-IDF baselines"
+      ],
+      tags: ["Python", "NLP / ABSA", "Transformers", "Scikit-Learn", "Pandas", "Matplotlib", "Streamlit"],
+      category: "AI/ML",
+      github: "https://github.com/Tushar-1208-cyber/AI-Customer_Sentiment_Analysis_and_Business_Insight_Engline_Using_NLP",
+      demo: "",
+      imageClass: "from-amber-500/20 via-orange-600/20 to-red-600/20",
       bentoClass: "md:col-span-2"
+    },
+    {
+      id: "securepatch",
+      title: "SecurePatch",
+      subtitle: "Autonomous AI Vulnerability Scanner & Automated Patch Verification",
+      description: "Automated software security pipeline that detects vulnerabilities in Python repositories via Bandit AST scans and synthesizes verified, regression-tested code patches using local LLMs.",
+      longDescription: "An AI-assisted cyber vulnerability detection and automated patch verification system. Ingests Python codebases, performs Bandit AST security scans, analyzes vulnerable code context using Abstract Syntax Trees, and orchestrates local LLMs to generate precise security fixes. Validates synthesized patches inside isolated Docker test runners against automated test suites.",
+      highlights: [
+        "Automated Bandit AST static vulnerability discovery & severity classification",
+        "AST source context analysis for high-fidelity patch generation",
+        "Multi-LLM benchmark evaluation measuring patch safety and compile rates",
+        "Isolated Docker container execution for zero-risk patch verification",
+        "Automated CI/CD security regression test runner"
+      ],
+      tags: ["Python", "FastAPI", "Docker", "Bandit AST", "LLM Code Synthesis", "Cybersecurity", "CI/CD Pipeline"],
+      category: "AI/ML",
+      github: "https://github.com/Tushar-1208-cyber/SecurePatch",
+      demo: "",
+      imageClass: "from-rose-600/20 via-pink-600/20 to-purple-600/20",
+      bentoClass: "md:col-span-3"
     }
   ] as Project[],
 
