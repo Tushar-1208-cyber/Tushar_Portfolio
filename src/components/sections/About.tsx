@@ -172,7 +172,7 @@ export default function About() {
             {/* Inner Profile Image Display Container */}
             <div className="absolute left-0 top-[2%] h-[94%] w-[82%] overflow-hidden rounded-[1.75rem] border border-white/15 bg-zinc-900 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] translate-x-[15px]">
               <Image
-                src="/tushar-profile.jpg"
+                src="/tushar-hero-v3.jpg"
                 alt="Tushar Gupta Profile avatar"
                 fill
                 priority
