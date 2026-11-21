@@ -172,7 +172,7 @@ export default function About() {
             {/* Inner Profile Image Display Container with Real Photo & Sci-Fi HUD */}
             <div className="absolute left-0 top-[2%] h-[94%] w-[82%] overflow-hidden rounded-[1.75rem] border border-cyan-400/30 bg-zinc-950 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] translate-x-[15px] group">
               <Image
-                src="/tushar-real.jpg"
+                src="/tushar-dark-bg.jpg"
                 alt="Tushar Gupta"
                 fill
                 priority
