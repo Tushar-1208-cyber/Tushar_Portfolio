@@ -135,9 +135,9 @@ export default function Contact() {
                 },
                 { 
                   icon: <MapPin className="h-5 w-5 text-purple-400" />, 
-                  label: "Corporate Seat", 
-                  val: "Delhi NCR, India",
-                  href: "#"
+                  label: "Location", 
+                  val: "Alwar, Rajasthan, India",
+                  href: "https://maps.google.com/?q=Alwar,+Rajasthan,+India"
                 }
               ].map((info, idx) => (
                 <div key={idx} className="flex items-center justify-between group p-2 rounded-2xl hover:bg-white/[0.01] transition-colors">
