@@ -170,9 +170,9 @@ export default function About() {
             <div className="absolute right-[-4%] top-[4%] h-[90%] w-[44%] rounded-[1.75rem] border border-white/[0.08] bg-white/[0.01] backdrop-blur-md pointer-events-none" />
             
             {/* Inner Profile Image Display Container with Real Photo & Sci-Fi HUD */}
-            <div className="absolute left-0 top-[2%] h-[94%] w-[82%] overflow-hidden rounded-[1.75rem] border border-cyan-400/30 bg-zinc-950 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] translate-x-[15px] group">
+            <div className="absolute left-0 top-[2%] h-[94%] w-[82%] overflow-hidden rounded-[1.75rem] border border-cyan-400/40 bg-zinc-950 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] translate-x-[15px] group">
               <Image
-                src="/tushar-dark-bg.jpg"
+                src="/tushar-warm-white.jpg"
                 alt="Tushar Gupta"
                 fill
                 priority
@@ -180,8 +180,8 @@ export default function About() {
                 className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               
-              {/* Gradient overlays: subtle top vignette and bottom fade for badges */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/95 via-black/10 to-black/35 pointer-events-none" />
+              {/* Subtle bottom gradient fade for footer badges */}
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
               
               {/* Neon border ring with subtle cyan inner glow */}
               <div className="absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-cyan-400/30 pointer-events-none shadow-[inset_0_0_20px_rgba(0,247,255,0.15)]" />
