@@ -199,7 +199,7 @@ export const portfolioData = {
       tags: ["Python", "FastAPI", "Docker", "Bandit AST", "LLM Code Synthesis", "Cybersecurity", "CI/CD Pipeline"],
       category: "AI/ML",
       github: "https://github.com/Tushar-1208-cyber/SecurePatch",
-      demo: "",
+      demo: "https://securepatch-4hgfxjcaj-tushar-1208-cybers-projects.vercel.app",
       imageClass: "from-rose-600/20 via-pink-600/20 to-purple-600/20",
       bentoClass: "md:col-span-3"
     }
