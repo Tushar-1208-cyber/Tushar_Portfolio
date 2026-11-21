@@ -169,18 +169,65 @@ export default function About() {
             {/* Background glowing frame border */}
             <div className="absolute right-[-4%] top-[4%] h-[90%] w-[44%] rounded-[1.75rem] border border-white/[0.08] bg-white/[0.01] backdrop-blur-md pointer-events-none" />
             
-            {/* Inner Profile Image Display Container */}
-            <div className="absolute left-0 top-[2%] h-[94%] w-[82%] overflow-hidden rounded-[1.75rem] border border-white/15 bg-zinc-900 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] translate-x-[15px]">
+            {/* Inner Profile Image Display Container with Real Photo & Sci-Fi HUD */}
+            <div className="absolute left-0 top-[2%] h-[94%] w-[82%] overflow-hidden rounded-[1.75rem] border border-cyan-400/30 bg-zinc-950 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] translate-x-[15px] group">
               <Image
-                src="/tushar-hero-v3.jpg"
-                alt="Tushar Gupta Profile avatar"
+                src="/tushar-real.jpg"
+                alt="Tushar Gupta"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 480px"
-                className="object-cover transition-transform duration-700 hover:scale-105"
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
-              <div className="absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/15 pointer-events-none" />
+              
+              {/* Gradient overlays: subtle top vignette and bottom fade for badges */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/95 via-black/10 to-black/35 pointer-events-none" />
+              
+              {/* Neon border ring with subtle cyan inner glow */}
+              <div className="absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-cyan-400/30 pointer-events-none shadow-[inset_0_0_20px_rgba(0,247,255,0.15)]" />
+
+              {/* Sci-Fi Corner Brackets */}
+              <div className="absolute top-2.5 left-2.5 w-3.5 h-3.5 border-t-2 border-l-2 border-cyan-400/80 pointer-events-none" />
+              <div className="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t-2 border-r-2 border-cyan-400/80 pointer-events-none" />
+              <div className="absolute bottom-2.5 left-2.5 w-3.5 h-3.5 border-b-2 border-l-2 border-cyan-400/80 pointer-events-none" />
+              <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 border-b-2 border-r-2 border-cyan-400/80 pointer-events-none" />
+
+              {/* Top Header Overlay: Name and Title */}
+              <div className="absolute top-3.5 left-3.5 right-3.5 flex items-start justify-between pointer-events-none z-10">
+                <div className="bg-black/65 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 shadow-lg">
+                  <div className="text-[12px] sm:text-[13px] font-bold tracking-widest uppercase text-white font-mono flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                    TUSHAR GUPTA
+                  </div>
+                  <div className="text-[8px] sm:text-[9px] font-mono tracking-wider text-cyan-300 uppercase">
+                    SOFTWARE DEVELOPER | ARCHITECT
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1 px-2 py-1 rounded bg-black/65 backdrop-blur-md border border-cyan-400/30 text-[8px] sm:text-[9px] font-mono text-cyan-400">
+                  <span className="w-1 h-1 rounded-full bg-emerald-400" />
+                  ONLINE
+                </div>
+              </div>
+
+              {/* Bottom Footer Overlay: Tech Stack & System Label */}
+              <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none z-10">
+                <div className="flex items-center gap-1">
+                  <span className="px-2 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/15 text-[8px] font-mono uppercase tracking-wider text-neutral-300">
+                    C++
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/15 text-[8px] font-mono uppercase tracking-wider text-neutral-300">
+                    PYTHON
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/15 text-[8px] font-mono uppercase tracking-wider text-neutral-300">
+                    REACT
+                  </span>
+                </div>
+
+                <div className="text-[8px] font-mono text-cyan-400/80 uppercase tracking-widest hidden sm:block">
+                  FUTURE TECH
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
