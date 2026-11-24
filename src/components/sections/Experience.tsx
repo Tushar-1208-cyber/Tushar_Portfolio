@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Calendar, MapPin, Award, ExternalLink, CheckCircle2, ShieldCheck } from "lucide-react";
-import Image from "next/image";
+import { Sparkles, Calendar, MapPin, CheckCircle2, ShieldCheck } from "lucide-react";
 import { portfolioData } from "@/data/portfolioData";
 
 export default function Experience() {
@@ -104,75 +103,49 @@ export default function Experience() {
                 </div>
               </div>
 
-              {/* Card Middle: Split description + Certificate Preview */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-8 items-center">
-                {/* Description & Key Deliverables */}
-                <div className="lg:col-span-8 space-y-4">
-                  <p className="text-neutral-300 text-sm md:text-base leading-relaxed font-poppins">
-                    {job.description}
-                  </p>
+              {/* Card Middle: Description & Key Deliverables */}
+              <div className="my-8 space-y-6">
+                <p className="text-neutral-300 text-sm md:text-base leading-relaxed font-poppins">
+                  {job.description}
+                </p>
 
-                  <div className="space-y-2 pt-2">
-                    <span className="text-[11px] uppercase font-mono tracking-wider text-primary font-medium flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      Key Responsibilities & Deliverables
-                    </span>
-                    <ul className="space-y-2.5 text-xs md:text-sm text-neutral-400 font-poppins mt-2">
-                      <li className="flex items-start gap-2.5">
-                        <span className="text-primary mt-0.5">▸</span>
-                        <span>Designed user-centric high-fidelity UI/UX prototypes and wireframes in <strong className="text-neutral-200">Figma</strong>.</span>
-                      </li>
-                      <li className="flex items-start gap-2.5">
-                        <span className="text-primary mt-0.5">▸</span>
-                        <span>Contributed significantly to <strong className="text-white">VetGPT Super Admin Panel Development</strong>, delivering interactive layouts, navigation, and web elements.</span>
-                      </li>
-                      <li className="flex items-start gap-2.5">
-                        <span className="text-primary mt-0.5">▸</span>
-                        <span>Crafted brand visual assets, marketing graphics, and digital product designs with <strong className="text-neutral-200">Canva</strong>.</span>
-                      </li>
-                    </ul>
+                <div className="space-y-3 pt-2">
+                  <span className="text-[11px] uppercase font-mono tracking-wider text-primary font-medium flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    Key Responsibilities & Deliverables
+                  </span>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+                    <div className="p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-primary/30 transition-all duration-300 shadow-sm">
+                      <span className="text-primary text-[11px] font-mono tracking-wider block mb-1.5 font-semibold">
+                        01 / PROTOTYPING
+                      </span>
+                      <p className="text-xs md:text-sm text-neutral-300 font-poppins leading-relaxed">
+                        Designed user-centric high-fidelity UI/UX prototypes and wireframes in <strong className="text-white">Figma</strong>.
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-primary/30 transition-all duration-300 shadow-sm">
+                      <span className="text-primary text-[11px] font-mono tracking-wider block mb-1.5 font-semibold">
+                        02 / VETGPT PRODUCT
+                      </span>
+                      <p className="text-xs md:text-sm text-neutral-300 font-poppins leading-relaxed">
+                        Contributed significantly to <strong className="text-white">VetGPT Super Admin Panel</strong>, delivering interactive layouts and web elements.
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-primary/30 transition-all duration-300 shadow-sm">
+                      <span className="text-primary text-[11px] font-mono tracking-wider block mb-1.5 font-semibold">
+                        03 / CREATIVE ASSETS
+                      </span>
+                      <p className="text-xs md:text-sm text-neutral-300 font-poppins leading-relaxed">
+                        Crafted brand visual assets, marketing graphics, and digital product designs with <strong className="text-white">Canva</strong>.
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Certificate Showcase Card */}
-                {job.certificateUrl && (
-                  <div className="lg:col-span-4 flex justify-center">
-                    <a
-                      href={job.certificateUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/cert relative block w-full max-w-[260px] overflow-hidden rounded-2xl border border-white/15 bg-black/50 hover:border-primary/60 transition-all duration-300 p-3 shadow-xl hover:shadow-[0_0_25px_rgba(0,247,255,0.2)] cursor-pointer"
-                    >
-                      <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-neutral-900 border border-white/10">
-                        <Image
-                          src={job.certificateUrl}
-                          alt="Rannlab Internship Certificate"
-                          fill
-                          sizes="(max-width: 768px) 100vw, 260px"
-                          className="object-cover object-top transition-transform duration-500 group-hover/cert:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                        
-                        <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white">
-                          <div className="flex items-center gap-1.5 text-[10px] font-mono">
-                            <Award className="w-3.5 h-3.5 text-primary" />
-                            <span>Certificate</span>
-                          </div>
-                          <ExternalLink className="w-3 h-3 text-primary opacity-80 group-hover/cert:translate-x-0.5 transition-transform" />
-                        </div>
-                      </div>
-
-                      <div className="mt-2.5 text-center">
-                        <span className="text-[11px] font-mono text-primary flex items-center justify-center gap-1 group-hover/cert:underline">
-                          View Full Certificate ↗
-                        </span>
-                      </div>
-                    </a>
-                  </div>
-                )}
               </div>
 
-              {/* Card Bottom: Skills Pills & Actions */}
+              {/* Card Bottom: Skills Pills */}
               <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[10px] uppercase font-mono tracking-wider text-neutral-500 mr-1">
@@ -187,19 +160,6 @@ export default function Experience() {
                     </span>
                   ))}
                 </div>
-
-                {job.certificateUrl && (
-                  <a
-                    href={job.certificateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-primary/40 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-mono tracking-wider transition-all shadow-[0_0_15px_rgba(0,247,255,0.12)] group/btn"
-                  >
-                    <Award className="w-4 h-4 text-primary group-hover/btn:scale-110 transition-transform" />
-                    <span>Open Certificate</span>
-                    <ExternalLink className="w-3 h-3 opacity-70" />
-                  </a>
-                )}
               </div>
             </motion.div>
           ))}

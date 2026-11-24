@@ -215,8 +215,7 @@ export const portfolioData = {
       description: "Designed user-centric UI/UX prototypes and high-fidelity interfaces using Figma. Created promotional creatives, marketing designs, and visual content using Canva. Actively contributed to the VetGPT Super Admin Panel Development project, designing interactive interface designs, dashboards, and responsive web elements.",
       skills: ["Figma", "Canva", "UI/UX Prototyping", "Admin Panel Design", "Wireframing", "Visual Design"],
       kanjiSymbol: "壱",
-      deptLabel: "DESIGN LAB",
-      certificateUrl: "/rannlab-certificate.jpg"
+      deptLabel: "DESIGN LAB"
     }
   ] as Job[]
 };
