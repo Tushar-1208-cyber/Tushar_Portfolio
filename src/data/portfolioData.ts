@@ -16,10 +16,14 @@ export interface Project {
 export interface SkillItem {
   name: string;
   level: number;
+  status?: string;
 }
 
 export interface SkillCategory {
+  id: string;
   title: string;
+  badge: string;
+  description: string;
   skills: SkillItem[];
 }
 
@@ -61,45 +65,102 @@ export const portfolioData = {
 
   skills: [
     {
-      title: "Languages",
+      id: "languages",
+      title: "Languages & Core CS",
+      badge: "ALGORITHMIC FOUNDATIONS",
+      description: "Strong algorithmic problem solving, modern multi-paradigm programming, and object-oriented software engineering.",
       skills: [
-        { name: "C++", level: 92 },
-        { name: "JavaScript", level: 90 },
-        { name: "Python", level: 85 }
+        { name: "C++", level: 92, status: "Advanced / DSA" },
+        { name: "Python", level: 90, status: "Full Stack / AI" },
+        { name: "JavaScript (ES6+)", level: 92, status: "Core Web" },
+        { name: "TypeScript", level: 88, status: "Type-Safe" },
+        { name: "SQL", level: 86, status: "Relational Queries" },
+        { name: "Data Structures & Algorithms", level: 94, status: "229+ Solved" },
+        { name: "OOPs & System Design", level: 88, status: "Architecture" }
       ]
     },
     {
-      title: "Frontend Tech",
+      id: "ai-ml",
+      title: "AI, GenAI & ML",
+      badge: "INTELLIGENT SYSTEMS",
+      description: "Building production-grade GenAI pipelines, local LLM fine-tuning with PyTorch, and NLP analytics engines.",
       skills: [
-        { name: "React.js", level: 95 },
-        { name: "TailwindCSS", level: 95 },
-        { name: "HTML/CSS", level: 95 }
+        { name: "Google Gemini AI", level: 92, status: "LLM APIs" },
+        { name: "TinyLlama 1.1B Fine-Tuning", level: 88, status: "Local Model" },
+        { name: "PyTorch & CUDA", level: 82, status: "GPU Accel" },
+        { name: "HuggingFace Transformers", level: 85, status: "Pipelines" },
+        { name: "Aspect-Based Sentiment (ABSA)", level: 88, status: "NLP Engine" },
+        { name: "Prompt Engineering", level: 92, status: "Orchestration" },
+        { name: "Bandit AST Security Scanner", level: 86, status: "Code Auditing" }
       ]
     },
     {
-      title: "Backend Core",
+      id: "frontend",
+      title: "Frontend Engineering",
+      badge: "MODERN INTERACTIVE UI",
+      description: "Crafting blazing fast, responsive, and pixel-perfect user interfaces with dynamic motion physics.",
       skills: [
-        { name: "Node.js", level: 88 },
-        { name: "Express.js", level: 90 },
-        { name: "REST APIs", level: 92 }
+        { name: "React.js", level: 95, status: "Production" },
+        { name: "Next.js 15 (App Router)", level: 92, status: "SSR / SSG" },
+        { name: "Tailwind CSS", level: 96, status: "Styling Core" },
+        { name: "HTML5 & Modern CSS3", level: 95, status: "Semantic" },
+        { name: "Framer Motion", level: 90, status: "Fluid Motion" },
+        { name: "Three.js / 3D Canvas", level: 82, status: "Visual Shaders" }
       ]
     },
     {
-      title: "Databases",
+      id: "backend",
+      title: "Backend & Systems",
+      badge: "SCALABLE APIS & WEBRTC",
+      description: "Architecting resilient server controllers, atomic database transactions, live WebRTC video, and Socket.io streams.",
       skills: [
-        { name: "MongoDB", level: 85 },
-        { name: "PostgreSQL", level: 80 },
-        { name: "SQL", level: 85 },
-        { name: "Mongoose", level: 90 }
+        { name: "Node.js", level: 90, status: "Runtime" },
+        { name: "Express.js", level: 92, status: "Microservices" },
+        { name: "FastAPI", level: 86, status: "Async Python" },
+        { name: "RESTful API Architecture", level: 94, status: "Standard" },
+        { name: "WebRTC Video Streams", level: 84, status: "Live Audio/Video" },
+        { name: "Socket.io", level: 88, status: "Real-Time Chat" },
+        { name: "JWT & Secure Auth", level: 90, status: "Auth Guard" }
       ]
     },
     {
-      title: "DevOps & Tools",
+      id: "databases",
+      title: "Databases & Cloud",
+      badge: "PERSISTENCE & SCHEMAS",
+      description: "Designing optimized data schemas, transactional database safety, and modern serverless PostgreSQL.",
       skills: [
-        { name: "Docker", level: 80 },
-        { name: "Git & GitHub", level: 92 },
-        { name: "Postman", level: 90 },
-        { name: "Vercel / CI/CD", level: 85 }
+        { name: "MongoDB", level: 90, status: "NoSQL Core" },
+        { name: "PostgreSQL (Neon DB)", level: 85, status: "Serverless SQL" },
+        { name: "MySQL", level: 88, status: "Relational" },
+        { name: "Mongoose ODM", level: 92, status: "Data Models" },
+        { name: "Drizzle ORM", level: 86, status: "Edge Safe" },
+        { name: "Firebase", level: 84, status: "Cloud Backend" }
+      ]
+    },
+    {
+      id: "devops",
+      title: "DevOps & Tooling",
+      badge: "INFRASTRUCTURE & CI/CD",
+      description: "Automating workflows with containerization, CI/CD pipelines, Git version control, and production deployments.",
+      skills: [
+        { name: "Docker", level: 84, status: "Containers" },
+        { name: "Git & GitHub", level: 94, status: "Version Control" },
+        { name: "Postman", level: 92, status: "API Testing" },
+        { name: "CI/CD Automation", level: 85, status: "Pipelines" },
+        { name: "Vercel Deployment", level: 90, status: "Edge Hosting" },
+        { name: "Linux / Bash", level: 82, status: "Command Line" }
+      ]
+    },
+    {
+      id: "design",
+      title: "UI/UX & Creative Tools",
+      badge: "PRODUCT DESIGN LAB",
+      description: "Translating complex functional requirements into intuitive wireframes, interactive design systems, and marketing assets.",
+      skills: [
+        { name: "Figma", level: 92, status: "Prototyping" },
+        { name: "Canva", level: 95, status: "Visual Assets" },
+        { name: "Admin Dashboard Design", level: 90, status: "VetGPT Experience" },
+        { name: "Wireframing & Mockups", level: 92, status: "Information Arch" }
       ]
     }
   ],
