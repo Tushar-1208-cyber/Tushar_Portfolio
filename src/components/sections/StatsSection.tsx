@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion as motionFramer } from "framer-motion";
 import { Code2, Sparkles, Award, Flame, Star, GitFork, ArrowUpRight } from "lucide-react";
 
@@ -18,7 +18,92 @@ const Github = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+interface MetricsState {
+  leetcode: {
+    totalSolved: number;
+    easySolved: number;
+    mediumSolved: number;
+    hardSolved: number;
+    ranking: string;
+    rating: number | null;
+  };
+  github: {
+    publicRepos: number;
+    totalContributions: number;
+    streak: number;
+    followers: number;
+  };
+  isLive: boolean;
+}
+
 export default function StatsSection() {
+  const [metrics, setMetrics] = useState<MetricsState>({
+    leetcode: {
+      totalSolved: 229,
+      easySolved: 144,
+      mediumSolved: 82,
+      hardSolved: 3,
+      ranking: "751,561",
+      rating: null,
+    },
+    github: {
+      publicRepos: 30,
+      totalContributions: 1719,
+      streak: 25,
+      followers: 2,
+    },
+    isLive: false,
+  });
+
+  const [cacheBuster, setCacheBuster] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+    setCacheBuster(`?t=${Date.now()}`);
+
+    async function fetchLiveMetrics() {
+      try {
+        const res = await fetch("/api/metrics");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (isMounted && data?.leetcode && data?.github) {
+          setMetrics({
+            leetcode: {
+              totalSolved: data.leetcode.totalSolved || 229,
+              easySolved: data.leetcode.easySolved || 144,
+              mediumSolved: data.leetcode.mediumSolved || 82,
+              hardSolved: data.leetcode.hardSolved || 3,
+              ranking: data.leetcode.ranking || "751,561",
+              rating: data.leetcode.rating || null,
+            },
+            github: {
+              publicRepos: data.github.publicRepos || 30,
+              totalContributions: data.github.totalContributions || 1719,
+              streak: data.github.streak || 25,
+              followers: data.github.followers || 2,
+            },
+            isLive: true,
+          });
+        }
+      } catch (e) {
+        console.error("Metrics sync error:", e);
+      }
+    }
+
+    fetchLiveMetrics();
+
+    // Auto-sync polling every 2 minutes while user stays on page
+    const interval = setInterval(fetchLiveMetrics, 120000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
+  const easyMilestone = Math.max(metrics.leetcode.easySolved + 16, 160);
+  const mediumMilestone = Math.max(metrics.leetcode.mediumSolved + 18, 100);
+  const hardMilestone = Math.max(metrics.leetcode.hardSolved + 7, 10);
+
   return (
     <section 
       id="stats" 
@@ -68,6 +153,10 @@ export default function StatsSection() {
                 <span className="text-sm font-bold font-poppins text-white uppercase tracking-wider">
                   LeetCode Analytics
                 </span>
+                <span className="flex items-center gap-1 text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Live Sync
+                </span>
               </div>
               <a 
                 href="https://leetcode.com/u/tushargupta1208/"
@@ -83,13 +172,13 @@ export default function StatsSection() {
             <div className="py-6 flex justify-between items-center gap-4">
               <div>
                 <span className="text-[10px] uppercase font-mono tracking-widest text-neutral-500 block">
-                  Contest Rating
+                  {metrics.leetcode.rating ? "Contest Rating" : "Global Solver Rank"}
                 </span>
                 <span className="text-3xl font-extrabold text-white mt-1 block font-poppins tracking-wide">
-                  1,758
+                  {metrics.leetcode.rating ? metrics.leetcode.rating.toLocaleString() : `#${metrics.leetcode.ranking}`}
                 </span>
                 <span className="text-[10px] text-amber-500 font-medium font-poppins mt-0.5 flex items-center gap-1">
-                  <Award className="h-3.5 w-3.5" /> Top 10% Solver
+                  <Award className="h-3.5 w-3.5" /> Active Problem Solver
                 </span>
               </div>
 
@@ -97,11 +186,23 @@ export default function StatsSection() {
                 {/* Circular indicator underlay */}
                 <svg className="w-full h-full transform -rotate-90">
                   <circle cx="48" cy="48" r="38" stroke="rgba(255,255,255,0.05)" strokeWidth="6" fill="transparent" />
-                  <circle cx="48" cy="48" r="38" stroke="#f59e0b" strokeWidth="6" fill="transparent"
-                    strokeDasharray="238" strokeDashoffset="45" strokeLinecap="round" className="transition-all duration-1000" />
+                  <circle 
+                    cx="48" 
+                    cy="48" 
+                    r="38" 
+                    stroke="#f59e0b" 
+                    strokeWidth="6" 
+                    fill="transparent"
+                    strokeDasharray="238" 
+                    strokeDashoffset={Math.max(0, 238 - (metrics.leetcode.totalSolved / 300) * 238)} 
+                    strokeLinecap="round" 
+                    className="transition-all duration-1000" 
+                  />
                 </svg>
                 <div className="absolute text-center">
-                  <span className="text-xl font-black text-white block leading-none font-outfit">180+</span>
+                  <span className="text-xl font-black text-white block leading-none font-outfit">
+                    {metrics.leetcode.totalSolved}
+                  </span>
                   <span className="text-[8px] uppercase tracking-widest text-neutral-500 mt-0.5 font-mono">Solved</span>
                 </div>
               </div>
@@ -110,20 +211,19 @@ export default function StatsSection() {
             {/* Sub Solve Breakdown list */}
             <div className="space-y-4 pt-4 border-t border-white/5">
               {[
-                { name: "Easy Problems", solved: 60, total: 80, color: "bg-emerald-500" },
-                { name: "Medium Problems", solved: 95, total: 120, color: "bg-amber-500" },
-                { name: "Hard Problems", solved: 25, total: 40, color: "bg-rose-500" }
+                { name: "Easy Problems", solved: metrics.leetcode.easySolved, total: easyMilestone, color: "bg-emerald-500" },
+                { name: "Medium Problems", solved: metrics.leetcode.mediumSolved, total: mediumMilestone, color: "bg-amber-500" },
+                { name: "Hard Problems", solved: metrics.leetcode.hardSolved, total: hardMilestone, color: "bg-rose-500" }
               ].map((tier, idx) => (
                 <div key={tier.name} className="space-y-1.5">
                   <div className="flex justify-between items-center text-xs font-poppins text-neutral-400">
                     <span className="font-medium">{tier.name}</span>
-                    <span className="font-mono text-white">{tier.solved} / {tier.total}</span>
+                    <span className="font-mono text-white">{tier.solved} <span className="text-neutral-500">/ {tier.total}</span></span>
                   </div>
                   <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                     <motionFramer.div
                       initial={{ width: 0 }}
-                      whileInView={{ width: `${(tier.solved / tier.total) * 100}%` }}
-                      viewport={{ once: true }}
+                      animate={{ width: `${Math.min(100, Math.round((tier.solved / tier.total) * 100))}%` }}
                       transition={{ duration: 1, delay: idx * 0.1 }}
                       className={`h-full ${tier.color} rounded-full`}
                     />
@@ -153,6 +253,10 @@ export default function StatsSection() {
                 <span className="text-sm font-bold font-poppins text-white uppercase tracking-wider">
                   GitHub Contribution Activity
                 </span>
+                <span className="flex items-center gap-1 text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/25">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  Live Sync
+                </span>
               </div>
               <a 
                 href="https://github.com/Tushar-1208-cyber"
@@ -166,14 +270,15 @@ export default function StatsSection() {
 
             {/* Live contribution graph (color matches cyan primary) */}
             <div className="w-full py-4 flex flex-col items-center justify-center overflow-x-auto">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-neutral-500 mb-4 self-start">
+              <span className="text-[10px] uppercase font-mono tracking-widest text-neutral-500 mb-4 self-start flex items-center gap-2">
                 Annual Coding Grid
+                <span className="text-[9px] text-primary/70 font-mono">● Real-time updates</span>
               </span>
               <div className="w-full min-w-[600px] flex justify-center bg-white/[0.01] p-3 border border-white/5 rounded-2xl">
                 {/* Embedded live chart stylized inside dark background */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
-                  src="https://ghchart.rshah.org/00f7ff/Tushar-1208-cyber"
+                  src={`https://ghchart.rshah.org/00f7ff/Tushar-1208-cyber${cacheBuster}`}
                   alt="Tushar-1208-cyber GitHub contribution graph"
                   width="720"
                   height="120"
@@ -187,22 +292,22 @@ export default function StatsSection() {
 
             {/* Quick stats boxes */}
             <div className="grid grid-cols-3 gap-4 pt-6 mt-6 border-t border-white/5 text-center">
-              <div className="p-3 bg-white/[0.01] border border-white/5 rounded-xl">
+              <div className="p-3 bg-white/[0.01] border border-white/5 rounded-xl hover:border-accent-pink/30 transition-colors">
                 <Flame className="h-4.5 w-4.5 text-accent-pink mx-auto mb-1 animate-bounce" />
-                <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-mono">Streak</span>
-                <span className="text-base font-bold text-white block mt-0.5">45 Days</span>
+                <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-mono">Max Streak</span>
+                <span className="text-base font-bold text-white block mt-0.5">{metrics.github.streak} Days</span>
               </div>
 
-              <div className="p-3 bg-white/[0.01] border border-white/5 rounded-xl">
+              <div className="p-3 bg-white/[0.01] border border-white/5 rounded-xl hover:border-primary/30 transition-colors">
                 <Star className="h-4.5 w-4.5 text-primary mx-auto mb-1" />
-                <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-mono">Total Stars</span>
-                <span className="text-base font-bold text-white block mt-0.5">120+</span>
+                <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-mono">Annual Commits</span>
+                <span className="text-base font-bold text-white block mt-0.5">{metrics.github.totalContributions.toLocaleString()}+</span>
               </div>
 
-              <div className="p-3 bg-white/[0.01] border border-white/5 rounded-xl">
+              <div className="p-3 bg-white/[0.01] border border-white/5 rounded-xl hover:border-purple-400/30 transition-colors">
                 <GitFork className="h-4.5 w-4.5 text-purple-400 mx-auto mb-1" />
-                <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-mono">Forks</span>
-                <span className="text-base font-bold text-white block mt-0.5">38 Total</span>
+                <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-mono">Public Repos</span>
+                <span className="text-base font-bold text-white block mt-0.5">{metrics.github.publicRepos} Repos</span>
               </div>
             </div>
 

@@ -46,7 +46,7 @@ export const portfolioData = {
       "Versatile by nature, I leverage modern developer ecosystems to build fast, scalable, and pixel-perfect applications."
     ],
     stats: [
-      { label: "DSA Solved", value: "180+" },
+      { label: "DSA Solved", value: "225+" },
       { label: "Projects", value: "15+" }
     ],
     socials: {
