@@ -179,7 +179,7 @@ export const portfolioData = {
       tags: ["Python", "NLP / ABSA", "Transformers", "Scikit-Learn", "Pandas", "Matplotlib", "Streamlit"],
       category: "AI/ML",
       github: "https://github.com/Tushar-1208-cyber/AI-Customer_Sentiment_Analysis_and_Business_Insight_Engline_Using_NLP",
-      demo: "",
+      demo: "https://ai-customer-sentiment-engine.vercel.app",
       imageClass: "from-amber-500/20 via-orange-600/20 to-red-600/20",
       bentoClass: "md:col-span-2"
     },
