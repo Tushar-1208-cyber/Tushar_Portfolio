@@ -9,7 +9,7 @@ export default function Experience() {
   return (
     <section 
       id="experience" 
-      className="relative w-full py-24 overflow-hidden"
+      className="relative w-full py-24 overflow-hidden scroll-mt-28"
       style={{
         background: "linear-gradient(180deg, #050816 0%, #07060f 20%, #09060f 50%, #07060f 80%, #050816 100%)",
       }}

@@ -75,7 +75,7 @@ export default function Skills() {
   return (
     <section 
       id="skills" 
-      className="relative w-full py-24 bg-[#050816] overflow-hidden"
+      className="relative w-full py-24 bg-[#050816] overflow-hidden scroll-mt-28"
       style={{
         background: "linear-gradient(180deg, #050816 0%, #070716 50%, #050816 100%)",
       }}

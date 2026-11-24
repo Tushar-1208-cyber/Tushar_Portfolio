@@ -31,7 +31,7 @@ export default function Projects() {
   return (
     <section 
       id="projects" 
-      className="relative w-full py-24 bg-[#050816] overflow-hidden"
+      className="relative w-full py-24 bg-[#050816] overflow-hidden scroll-mt-28"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.05)_0%,transparent_70%)] pointer-events-none" />
 

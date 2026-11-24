@@ -76,7 +76,7 @@ export default function Contact() {
   return (
     <section 
       id="contact" 
-      className="relative w-full py-24 bg-[#050816] overflow-hidden"
+      className="relative w-full py-24 bg-[#050816] overflow-hidden scroll-mt-28"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,247,255,0.02)_0%,transparent_80%)] pointer-events-none" />
 

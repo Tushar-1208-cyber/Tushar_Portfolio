@@ -39,7 +39,7 @@ export default function About() {
   return (
     <section 
       id="about" 
-      className="relative w-full py-24 bg-[#050816] overflow-hidden"
+      className="relative w-full py-24 bg-[#050816] overflow-hidden scroll-mt-28"
       style={{
         background: "linear-gradient(180deg, #050816 0%, #080518 50%, #050816 100%)",
       }}

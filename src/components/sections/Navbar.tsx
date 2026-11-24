@@ -23,23 +23,42 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map((item) => item.href.slice(1));
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      // 1. If reached bottom of document, activate Contact
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const fullHeight = document.documentElement.scrollHeight;
+      
+      if (scrollY + windowHeight >= fullHeight - 120) {
+        setActiveSection("contact");
+        return;
+      }
 
-      for (const section of sections) {
-        const el = document.getElementById(section);
+      // 2. If at top of document, activate Home
+      if (scrollY < 200) {
+        setActiveSection("home");
+        return;
+      }
+
+      // 3. Precise viewport intersection detection using getBoundingClientRect
+      const sections = navItems.map((item) => item.href.slice(1));
+      const navOffset = 140; // Clearance under fixed navbar
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionId = sections[i];
+        const el = document.getElementById(sectionId);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
+          const rect = el.getBoundingClientRect();
+          // If the top of the section is at or above the navbar trigger point
+          if (rect.top <= navOffset && rect.bottom > navOffset) {
+            setActiveSection(sectionId);
+            return;
           }
         }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -47,8 +66,22 @@ export default function Navbar() {
     e.preventDefault();
     const targetId = href.slice(1);
     const element = document.getElementById(targetId);
+    
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      if (targetId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setActiveSection("home");
+        return;
+      }
+
+      const navHeight = window.innerWidth >= 768 ? 90 : 30;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navHeight;
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: "smooth"
+      });
       setActiveSection(targetId);
     }
   };
@@ -61,9 +94,10 @@ export default function Navbar() {
           href="#home"
           onClick={(e) => {
             e.preventDefault();
-            document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setActiveSection("home");
           }}
-          className="group block font-outfit font-extrabold text-2xl tracking-tighter text-white hover:scale-105 transition-all duration-300"
+          className="group block font-outfit font-extrabold text-2xl tracking-tighter text-white hover:scale-105 transition-all duration-300 cursor-pointer"
         >
           TG<span className="text-primary group-hover:text-accent-pink transition-colors">.</span>
         </a>
@@ -81,22 +115,23 @@ export default function Navbar() {
       >
         <div className="relative flex items-center gap-1 sm:gap-2">
           {navItems.map((item) => {
-            const isActive = activeSection === item.href.slice(1);
+            const targetId = item.href.slice(1);
+            const isActive = activeSection === targetId;
             return (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`relative z-10 items-center flex space-x-1 px-2.5 sm:px-4 py-2 rounded-full transition-colors duration-300 text-xs sm:text-sm font-medium ${
-                  isActive ? "text-white" : "text-neutral-400 hover:text-white"
+                className={`relative z-10 items-center flex space-x-1 px-3 sm:px-4 py-2 rounded-full transition-colors duration-300 text-xs sm:text-sm font-medium cursor-pointer ${
+                  isActive ? "text-white font-semibold" : "text-neutral-400 hover:text-white"
                 }`}
               >
                 {/* Active Indicator Underlay */}
                 {isActive && (
                   <motion.span
                     layoutId="activeUnderlay"
-                    className="absolute inset-0 bg-white/10 rounded-full -z-10 border border-white/5"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 bg-white/10 rounded-full -z-10 border border-white/10 shadow-[0_0_15px_rgba(0,247,255,0.15)]"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
                 
@@ -112,7 +147,7 @@ export default function Navbar() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative z-10 text-xs font-semibold border border-primary/30 text-white px-3 sm:px-4 py-2 rounded-full ml-1 sm:ml-2 bg-gradient-to-b from-primary/20 via-transparent to-transparent hover:from-primary/30 hover:border-primary/60 hover:shadow-[0_0_15px_rgba(0,247,255,0.2)] transition-all duration-300 shadow-inner flex items-center gap-1.5"
+            className="relative z-10 text-xs font-semibold border border-primary/30 text-white px-3 sm:px-4 py-2 rounded-full ml-1 sm:ml-2 bg-gradient-to-b from-primary/20 via-transparent to-transparent hover:from-primary/30 hover:border-primary/60 hover:shadow-[0_0_15px_rgba(0,247,255,0.2)] transition-all duration-300 shadow-inner flex items-center gap-1.5 cursor-pointer"
           >
             <span className="hidden sm:block">Resume</span>
             <FileText className="h-4 w-4 block sm:hidden" />

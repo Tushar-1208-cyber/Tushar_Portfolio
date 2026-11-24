@@ -95,7 +95,15 @@ export default function Hero() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    if (el) {
+      const navHeight = window.innerWidth >= 768 ? 90 : 30;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: Math.max(0, elementPosition - navHeight),
+        behavior: "smooth"
+      });
+    }
   };
 
   return (
