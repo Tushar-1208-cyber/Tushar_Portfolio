@@ -212,6 +212,47 @@ export default function Hero() {
             Download Resume
           </a>
         </motion.div>
+
+        {/* Prominent High-Visibility Social Channels */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-7 flex items-center justify-center gap-3 sm:gap-4 flex-wrap"
+        >
+          <a
+            href="https://github.com/Tushar-1208-cyber"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2.5 px-4 py-2 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-primary/50 text-neutral-300 hover:text-white transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(0,247,255,0.25)] hover:-translate-y-0.5 cursor-pointer"
+          >
+            <Github className="h-5 w-5 text-primary group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-semibold tracking-wider font-poppins">GitHub</span>
+            <span className="text-[10px] font-mono text-neutral-500 group-hover:text-primary transition-colors">↗</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/tushar-gupta-52b6a5292/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2.5 px-4 py-2 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-[#0a66c2]/60 text-neutral-300 hover:text-white transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(10,102,194,0.3)] hover:-translate-y-0.5 cursor-pointer"
+          >
+            <Linkedin className="h-5 w-5 text-[#0a66c2] group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-semibold tracking-wider font-poppins">LinkedIn</span>
+            <span className="text-[10px] font-mono text-neutral-500 group-hover:text-[#0a66c2] transition-colors">↗</span>
+          </a>
+
+          <a
+            href="https://leetcode.com/u/tushargupta1208/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2.5 px-4 py-2 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-amber-500/60 text-neutral-300 hover:text-white transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:-translate-y-0.5 cursor-pointer"
+          >
+            <Code className="h-5 w-5 text-amber-500 group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-semibold tracking-wider font-poppins">LeetCode</span>
+            <span className="text-[10px] font-mono text-neutral-500 group-hover:text-amber-500 transition-colors">↗</span>
+          </a>
+        </motion.div>
       </div>
 
       {/* Floating typing typewriter subtitle (fixed at bottom-center above fold) */}
@@ -232,39 +273,6 @@ export default function Hero() {
         </span>
       </motion.div>
 
-      {/* Social links (Bottom left floating on larger screens) */}
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="absolute bottom-8 left-8 z-30 hidden md:flex items-center gap-5"
-      >
-        <a 
-          href="https://github.com/Tushar-1208-cyber" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-neutral-400 hover:text-primary transition-colors duration-300"
-        >
-          <Github className="h-5 w-5 hover:scale-110 transition-transform" />
-        </a>
-        <a 
-          href="https://www.linkedin.com/in/tushar-gupta-52b6a5292/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-neutral-400 hover:text-primary transition-colors duration-300"
-        >
-          <Linkedin className="h-5 w-5 hover:scale-110 transition-transform" />
-        </a>
-        <a 
-          href="https://leetcode.com/u/tushargupta1208/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-neutral-400 hover:text-primary transition-colors duration-300"
-        >
-          <Code className="h-5 w-5 hover:scale-110 transition-transform" />
-        </a>
-        <div className="h-[1px] w-12 bg-white/10" />
-      </motion.div>
 
       {/* Floating mouse-scroll indicator at the bottom */}
       <motion.div 
