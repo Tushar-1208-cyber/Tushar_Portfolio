@@ -97,7 +97,7 @@ export default function About() {
           >
             <div className="px-4 py-6 text-center hover:bg-white/[0.02] transition-colors duration-300">
               <div className="flex items-baseline justify-center gap-0.5">
-                <span className="text-3xl font-bold text-white md:text-4xl font-instrument">180</span>
+                <span className="text-3xl font-bold text-white md:text-4xl font-instrument">225</span>
                 <span className="text-sm font-semibold text-accent-pink font-instrument">+</span>
               </div>
               <span className="mt-2 block text-[9px] uppercase tracking-[0.2em] text-neutral-500 font-mono">

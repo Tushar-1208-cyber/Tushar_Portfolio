@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { House, User, Briefcase, Phone, FileText, Code2, Award } from "lucide-react";
 
@@ -20,36 +20,39 @@ const navItems: NavItem[] = [
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const isClickScrolling = useRef(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      // 1. If reached bottom of document, activate Contact
+      // If a click-triggered smooth scroll is active, do not overwrite the active section
+      if (isClickScrolling.current) return;
+
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const fullHeight = document.documentElement.scrollHeight;
       
-      if (scrollY + windowHeight >= fullHeight - 120) {
+      // 1. If at bottom of document, activate Contact
+      if (scrollY + windowHeight >= fullHeight - 100) {
         setActiveSection("contact");
         return;
       }
 
-      // 2. If at top of document, activate Home
-      if (scrollY < 200) {
+      // 2. If near top of document, activate Home
+      if (scrollY < 250) {
         setActiveSection("home");
         return;
       }
 
-      // 3. Precise viewport intersection detection using getBoundingClientRect
+      // 3. Focal line detection: section containing the focal center (38% from top of viewport)
       const sections = navItems.map((item) => item.href.slice(1));
-      const navOffset = 140; // Clearance under fixed navbar
+      const focalLine = windowHeight * 0.38;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const sectionId = sections[i];
+      for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
           const rect = el.getBoundingClientRect();
-          // If the top of the section is at or above the navbar trigger point
-          if (rect.top <= navOffset && rect.bottom > navOffset) {
+          if (rect.top <= focalLine && rect.bottom >= focalLine) {
             setActiveSection(sectionId);
             return;
           }
@@ -59,22 +62,32 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.slice(1);
-    const element = document.getElementById(targetId);
     
-    if (element) {
-      if (targetId === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setActiveSection("home");
-        return;
-      }
+    // Lock scrollspy during click navigation
+    isClickScrolling.current = true;
+    setActiveSection(targetId);
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 900);
 
-      const navHeight = window.innerWidth >= 768 ? 90 : 30;
+    if (targetId === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const element = document.getElementById(targetId);
+    if (element) {
+      const navHeight = window.innerWidth >= 768 ? 95 : 30;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - navHeight;
 
@@ -82,7 +95,6 @@ export default function Navbar() {
         top: Math.max(0, offsetPosition),
         behavior: "smooth"
       });
-      setActiveSection(targetId);
     }
   };
 
@@ -94,8 +106,13 @@ export default function Navbar() {
           href="#home"
           onClick={(e) => {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            isClickScrolling.current = true;
             setActiveSection("home");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+            scrollTimeout.current = setTimeout(() => {
+              isClickScrolling.current = false;
+            }, 900);
           }}
           className="group block font-outfit font-extrabold text-2xl tracking-tighter text-white hover:scale-105 transition-all duration-300 cursor-pointer"
         >
