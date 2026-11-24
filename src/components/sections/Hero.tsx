@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Code } from "lucide-react";
+import { ArrowRight, Code, FileText } from "lucide-react";
 import CanvasBackground from "../CanvasBackground";
 
 const Github = (props: React.SVGProps<SVGSVGElement>) => (
@@ -205,8 +205,10 @@ export default function Hero() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-full border border-white/10 hover:border-primary/50 text-xs font-semibold uppercase tracking-widest font-poppins text-neutral-300 hover:text-white bg-white/[0.02] hover:bg-white/[0.06] transition-all"
+            download="Tushar_Gupta_Resume.pdf"
+            className="px-5 py-2.5 rounded-full border border-white/10 hover:border-primary/50 text-xs font-semibold uppercase tracking-widest font-poppins text-neutral-300 hover:text-white bg-white/[0.02] hover:bg-white/[0.06] transition-all flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(0,247,255,0.15)]"
           >
+            <FileText className="w-3.5 h-3.5 text-primary" />
             Download Resume
           </a>
         </motion.div>

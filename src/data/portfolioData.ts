@@ -53,7 +53,9 @@ export const portfolioData = {
       github: "https://github.com/Tushar-1208-cyber",
       linkedin: "https://www.linkedin.com/in/tushar-gupta-52b6a5292/",
       leetcode: "https://leetcode.com/u/tushargupta1208/",
-      email: "tushargupta1208@gmail.com"
+      email: "tushargupta1208@gmail.com",
+      resume: "/resume.pdf",
+      resumeDrive: "https://drive.google.com/file/d/1rTYt_5BwTcPd782tjRS1GH933kiPk3pg/view?usp=sharing"
     }
   },
 
